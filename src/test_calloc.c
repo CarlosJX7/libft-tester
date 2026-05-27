@@ -15,7 +15,7 @@
 #include <string.h>
 #include <stdint.h>
 
-int g_num_subtests = 6; 
+int g_num_subtests = 7;
 
 int run_subtest(int index)
 {
@@ -29,7 +29,6 @@ int run_subtest(int index)
         char *arr = (char *)ft_calloc(100, sizeof(char));
         if (!arr)
             return (0);
-        
         int all_zeros = 1;
         for (size_t i = 0; i < 100; i++)
         {
@@ -78,6 +77,18 @@ int run_subtest(int index)
         arr[4] = 42;
         int ok = (arr[0] == 42 && arr[4] == 42 && arr[2] == 0);
         free(arr);
+        return (ok);
+    }
+    if (index == 7)
+    {
+        size_t count = (SIZE_MAX / 10) + 1;
+        size_t size = 10;
+        void *mem1 = ft_calloc(count, size);
+// El test espera que mem1 == NULL (porque count * size overflowea)
+        // Si la implementación es correcta, debe devolver NULL en caso de overflow.
+        int ok = (mem1 == NULL);
+        if (mem1)
+            free(mem1);
         return (ok);
     }
     return (0);
